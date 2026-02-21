@@ -29,9 +29,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased w-dvw h-dvh`}>
         <AppProvider>
-          <ToasterProvider />
-          <HeaderComponent />
-          {children}
+          <ToasterProvider>
+            <HeaderComponent />
+            {children}
+          </ToasterProvider>
         </AppProvider>
       </body>
     </html>
