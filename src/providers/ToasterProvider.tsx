@@ -1,6 +1,9 @@
+'use client';
+
+import { PropsWithChildren } from 'react';
 import { Toaster } from 'sonner';
 
-export default function ToasterProvider({ children }: { children: React.ReactNode }) {
+export default function ToasterProvider({ children }: PropsWithChildren) {
   return (
     <html lang="en">
       <body>
