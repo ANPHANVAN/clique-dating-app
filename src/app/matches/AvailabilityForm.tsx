@@ -37,17 +37,30 @@ export default function AvailabilityForm({ onSave }: Props) {
   };
 
   return (
-    <div className="space-y-2 border p-4 rounded-lg">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSave(date, start, end);
+      }}
+      className="space-y-2 border p-4 rounded-lg"
+    >
       <Input required type="date" value={date} onChange={handleChangeDate} />
 
       <div className="flex gap-2">
-        <Input required type="number" value={start} onChange={(e) => setStart(Number(e.target.value))} />
+        <Input
+          required
+          type="number"
+          min={0}
+          max={23}
+          value={start}
+          onChange={(e) => setStart(Number(e.target.value))}
+        />
         <Input required type="number" min={0} max={23} value={end} onChange={(e) => setEnd(Number(e.target.value))} />
       </div>
 
-      <Button className="w-full" onClick={() => onSave(date, start, end)}>
+      <Button className="w-full" type="submit">
         Save Availability
       </Button>
-    </div>
+    </form>
   );
 }
