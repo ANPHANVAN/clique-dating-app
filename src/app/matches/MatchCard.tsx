@@ -34,23 +34,23 @@ export default function MatchCard({ match, otherUser, dating, overlap, onAddAvai
       <CardContent className="space-y-4">
         <p className="text-sm text-muted-foreground">{otherUser.bio}</p>
         <div className="grid grid-cols-2">
-          <p>
+          <div>
             {otherUser.name} pick time:
             {otherPicktime.map((time) => {
               return (
                 <p key={time.id}>{`${new Date(time.date).toLocaleDateString()} from ${time.start} to ${time.end}`}</p>
               );
             })}
-          </p>
+          </div>
 
-          <p>
+          <div>
             You pick time:
             {youPicktime.map((time) => {
               return (
                 <p key={time.id}>{`${new Date(time.date).toLocaleDateString()} from ${time.start} to ${time.end}`}</p>
               );
             })}
-          </p>
+          </div>
         </div>
 
         {!dating && <AvailabilityForm onSave={onAddAvailability} />}
