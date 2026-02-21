@@ -21,6 +21,7 @@ export default function MatchesPage() {
   };
 
   const handleAddAvailability = (matchId: string, date: string, start: number, end: number) => {
+    toast.success('Pick availability success');
     const newAvailability = {
       id: crypto.randomUUID(),
       userId: currentUser.id,

@@ -15,8 +15,12 @@ interface Props {
 
 export default function MatchCard({ match, otherUser, dating, overlap, onAddAvailability }: Props) {
   const { modelState, setModelState } = useAppContext();
-  const otherPicktime: Availability | undefined = modelState.availabilities.find(
+  const otherPicktime: Availability[] = modelState.availabilities.filter(
     (availability) => availability.userId === otherUser.id
+  );
+
+  const youPicktime: Availability[] = modelState.availabilities.filter(
+    (availability) => availability.userId === modelState.currentUser?.id
   );
 
   return (
@@ -29,14 +33,26 @@ export default function MatchCard({ match, otherUser, dating, overlap, onAddAvai
 
       <CardContent className="space-y-4">
         <p className="text-sm text-muted-foreground">{otherUser.bio}</p>
-        {otherPicktime ? (
+        <div className="grid grid-cols-2">
           <p>
-            User B pick time:{' '}
-            {`${new Date(otherPicktime.date).toLocaleDateString()} from ${otherPicktime.start} to ${otherPicktime.end}`}
+            {otherUser.name} pick time:
+            {otherPicktime.map((time) => {
+              return (
+                <p key={time.id}>{`${new Date(time.date).toLocaleDateString()} from ${time.start} to ${time.end}`}</p>
+              );
+            })}
           </p>
-        ) : (
-          <p>User B not pick time yet</p>
-        )}
+
+          <p>
+            You pick time:
+            {youPicktime.map((time) => {
+              return (
+                <p key={time.id}>{`${new Date(time.date).toLocaleDateString()} from ${time.start} to ${time.end}`}</p>
+              );
+            })}
+          </p>
+        </div>
+
         {!dating && <AvailabilityForm onSave={onAddAvailability} />}
 
         {dating && (

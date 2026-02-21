@@ -5,11 +5,9 @@ import { Toaster } from 'sonner';
 
 export default function ToasterProvider({ children }: PropsWithChildren) {
   return (
-    <html lang="en">
-      <body>
-        {children}
-        <Toaster />
-      </body>
-    </html>
+    <>
+      {children}
+      <Toaster />
+    </>
   );
 }
